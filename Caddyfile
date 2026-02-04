@@ -1,14 +1,14 @@
 # Caddy Internal — Homelab reverse proxy
 # Served via Tailscale Services (caddy-lab-01 + caddy-lab-02)
-#
-# Wildcard TLS via Cloudflare DNS challenge:
-#   *.home.example.com {
-#     tls {
-#       dns cloudflare {env.CLOUDFLARE_API_TOKEN}
-#     }
-#     reverse_proxy <tailscale-ip>:<port>
-#   }
 
-:80 {
+# Health check endpoint
+:8080 {
 	respond "caddy-internal healthy" 200
+}
+
+paperless.meltforce.net {
+	tls {
+		dns cloudflare {env.CLOUDFLARE_API_TOKEN}
+	}
+	reverse_proxy 100.80.158.113:8000
 }
