@@ -5,10 +5,3 @@
 :8080 {
 	respond "caddy-internal healthy" 200
 }
-
-paperless.meltforce.net {
-	tls {
-		dns cloudflare {env.CLOUDFLARE_API_TOKEN}
-	}
-	reverse_proxy 100.80.158.113:8000
-}
